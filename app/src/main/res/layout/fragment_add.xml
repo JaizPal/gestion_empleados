@@ -54,17 +54,13 @@
                 android:paddingTop="15dp"
                 android:text="Departamento" />
 
-            <EditText
-                android:id="@+id/editTextDepartamentoInAdd"
-                style="@style/textoBlanco"
+            <Spinner
+                android:id="@+id/spinner"
+                style="@style/spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Departamento"
-                android:inputType="textPersonName"
-                android:paddingBottom="15dp"
-                android:textColor="@color/verdeSelec"
-                android:textColorHint="#65656565" />
+                android:minHeight="48dp"
+                android:scrollbarStyle="outsideInset" />
 
             <TextView
                 android:id="@+id/textView9"

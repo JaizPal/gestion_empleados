@@ -8,6 +8,9 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class DataBaseEmpleados extends SQLiteOpenHelper {
 
     private Context context;
@@ -20,6 +23,8 @@ public class DataBaseEmpleados extends SQLiteOpenHelper {
     private static final String COLUM_DEPARTAMENTO = "departamento";
     private static final String COLUM_SALARIO = "salario";
 
+    public static final String[] LISTA_DEPARTAMENTOS ={"RRHH", "Marketing", "Comercial", "Logística", "Dirección",
+            "Operario", "Otro"};
 
     public DataBaseEmpleados(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

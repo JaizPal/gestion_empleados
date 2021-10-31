@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.MultiAutoCompleteTextView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,8 +20,8 @@ import androidx.fragment.app.FragmentTransaction;
 public class add extends Fragment {
 
 	Button bAtras, bAdd;
-	EditText apellidoInput, departamentoInput, salarioInput;
-
+	EditText apellidoInput, salarioInput;
+	Spinner departamentoInput;
 	FragmentTransaction transaction;
 	Fragment fragmentoMenu;
 
@@ -35,10 +38,14 @@ public class add extends Fragment {
 		transaction = getParentFragmentManager().beginTransaction();
 		fragmentoMenu = new menu();
 		context = container.getContext();
+
 		bAdd = view.findViewById(R.id.botonAddInAdd);
 		bAtras = view.findViewById(R.id.botonVolverInAdd);
 		apellidoInput = view.findViewById(R.id.editTextApellidoInAdd);
-		departamentoInput = view.findViewById(R.id.editTextDepartamentoInAdd);
+		departamentoInput = view.findViewById(R.id.spinner);
+
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, R.layout.itemspinner, DataBaseEmpleados.LISTA_DEPARTAMENTOS);
+		departamentoInput.setAdapter(adapter);
 		salarioInput = view.findViewById(R.id.editTextSalarioInAdd);
 
 		setListeners(view);
@@ -59,7 +66,7 @@ public class add extends Fragment {
 	private void addEmpleado(View v) {
 		DataBaseEmpleados db = new DataBaseEmpleados(context);
         boolean success = db.addEmpleado(apellidoInput.getText().toString().trim(),
-                departamentoInput.getText().toString().trim(),
+                departamentoInput.getSelectedItem().toString().trim(),
                 Double.parseDouble(salarioInput.getText().toString().trim()));
         if(success) {
 			Toast.makeText(context, "Empleado añadido", Toast.LENGTH_SHORT).show();

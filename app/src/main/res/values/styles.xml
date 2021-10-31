@@ -29,5 +29,9 @@
         <item name="android:fontFamily">@font/michroma</item>
     </style>
 
+    <style name="spinner" parent="@android:style/Widget.Holo.DropDownItem.Spinner">>
+        <item name="android:textColor">@color/verdeSelec</item>
+    </style>
+
 
 </resources>
