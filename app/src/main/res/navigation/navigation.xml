@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/menu">
+
+    <fragment
+        android:id="@+id/menu"
+        android:name="com.example.gestion_empleados.menu"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menu_to_buscar"
+            app:destination="@id/buscar"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_menu_to_ver"
+            app:destination="@id/ver" />
+        <action
+            android:id="@+id/action_menu_to_add"
+            app:destination="@id/add" />
+        <action
+            android:id="@+id/action_menu_to_modificar"
+            app:destination="@id/modificar" />
+        <action
+            android:id="@+id/action_menu_to_eliminar"
+            app:destination="@id/eliminar" />
+    </fragment>
+    <fragment
+        android:id="@+id/buscar"
+        android:name="com.example.gestion_empleados.buscar"
+        android:label="fragment_buscar"
+        tools:layout="@layout/fragment_buscar" >
+        <action
+            android:id="@+id/action_buscar_to_menu"
+            app:destination="@id/menu" />
+    </fragment>
+    <fragment
+        android:id="@+id/ver"
+        android:name="com.example.gestion_empleados.ver"
+        android:label="fragment_ver"
+        tools:layout="@layout/fragment_ver" >
+        <action
+            android:id="@+id/action_ver_to_menu"
+            app:destination="@id/menu" />
+    </fragment>
+    <fragment
+        android:id="@+id/add"
+        android:name="com.example.gestion_empleados.add"
+        android:label="fragment_add"
+        tools:layout="@layout/fragment_add" >
+        <action
+            android:id="@+id/action_add_to_menu"
+            app:destination="@id/menu" />
+    </fragment>
+    <fragment
+        android:id="@+id/modificar"
+        android:name="com.example.gestion_empleados.modificar"
+        android:label="fragment_modificar"
+        tools:layout="@layout/fragment_modificar" >
+        <action
+            android:id="@+id/action_modificar_to_menu"
+            app:destination="@id/menu" />
+    </fragment>
+    <fragment
+        android:id="@+id/eliminar"
+        android:name="com.example.gestion_empleados.eliminar"
+        android:label="fragment_eliminar"
+        tools:layout="@layout/fragment_eliminar" >
+        <action
+            android:id="@+id/action_eliminar_to_menu"
+            app:destination="@id/menu" />
+    </fragment>
+</navigation>

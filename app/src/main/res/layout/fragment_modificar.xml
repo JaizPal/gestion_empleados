@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".modificar">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backNight">
+
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Modificar empleado"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.038" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="359dp"
+            android:layout_marginTop="1dp"
+            android:orientation="vertical"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:id="@+id/textView5"
+                style="@style/textoBlanco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ID" />
+
+            <EditText
+                android:id="@+id/editTextTextPersonName"
+                style="@style/textoBlanco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="ID"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:textColor="@color/verdeSelec"
+                android:textColorHint="#65656565" />
+
+            <TextView
+                android:id="@+id/texApellido"
+                style="@style/textoBlanco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:text="Apellido" />
+
+            <EditText
+                android:id="@+id/editTextApellidoInAdd"
+                style="@style/textoBlanco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Apellido"
+                android:inputType="textPersonName"
+                android:paddingBottom="15dp"
+                android:textColor="@color/verdeSelec"
+                android:textColorHint="#65656565" />
+
+            <TextView
+                android:id="@+id/textView11"
+                style="@style/textoBlanco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:text="Departamento" />
+
+            <EditText
+                android:id="@+id/editTextDepartamentoInAdd"
+                style="@style/textoBlanco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Departamento"
+                android:inputType="textPersonName"
+                android:paddingBottom="15dp"
+                android:textColor="@color/verdeSelec"
+                android:textColorHint="#65656565" />
+
+            <TextView
+                android:id="@+id/textView9"
+                style="@style/textoBlanco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:text="Salario" />
+
+            <EditText
+                android:id="@+id/editTextSalarioInAdd"
+                style="@style/textoBlanco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Salario"
+                android:inputType="number|numberDecimal"
+                android:paddingBottom="15dp"
+                android:textColor="@color/verdeSelec"
+                android:textColorHint="#65656565" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button3"
+            style="@style/botonVerde"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Añadir"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/botonVolverInModificar"
+            style="@style/botonRojo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="36dp"
+            android:text="volver"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
