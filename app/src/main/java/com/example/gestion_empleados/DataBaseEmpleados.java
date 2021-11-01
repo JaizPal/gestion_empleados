@@ -2,12 +2,14 @@ package com.example.gestion_empleados;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -55,5 +57,23 @@ public class DataBaseEmpleados extends SQLiteOpenHelper {
         long result = db.insert(TABLE_NAME, null, cv);
         
         return result != -1;
+    }
+
+    ArrayList<Empleado> getAllEmpleados() {
+        ArrayList<Empleado> empleados = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db != null) {
+            cursor = db.rawQuery(query, null);
+        }
+        while(cursor.moveToNext()) {
+            empleados.add(new Empleado(cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getDouble(3)));
+        }
+        return empleados;
     }
 }

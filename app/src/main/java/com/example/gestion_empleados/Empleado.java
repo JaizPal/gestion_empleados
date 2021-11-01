@@ -4,15 +4,24 @@ public class Empleado {
 
     public static final String[] DEPARTAMENTOS = { "RRHH", "Marketing", "Comercial", "Logística", "Dirección",
             "Operario", "Otro" };
+    private int id;
     private String apellido;
     private String departamento;
     private double salario;
 
-    public Empleado(String apellido, String departamento, double salario) {
+    public Empleado(int id, String apellido, String departamento, double salario) {
+        this.id = id;
         this.apellido = apellido;
         this.departamento = setDepartamento(departamento);
         this.salario = salario;
     }
+
+    @Override
+    public String toString() {
+        return "ID: " + id + "\nApellido: " + apellido + "\nDepartamento: " + departamento + "\nSalario: " + salario;
+    }
+
+    public int getId() {return id;}
 
     public String getApellido() {
         return apellido;

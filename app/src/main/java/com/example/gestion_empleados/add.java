@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,6 +56,7 @@ public class add extends Fragment {
 	public void setListeners(View v) {
 		bAdd.setOnClickListener(view -> addEmpleado(view));
 		bAtras.setOnClickListener(view -> irMenu(view));
+
 	}
 
 	public void irMenu(View v) {
@@ -63,15 +65,36 @@ public class add extends Fragment {
 		transaction.commit();
 	}
 
+	public void departamentoListener(View view) {
+		bajarTeclado(view);
+	}
+
+	public void bajarTeclado(View view) {
+		InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+	}
+
 	private void addEmpleado(View v) {
+		bajarTeclado(v);
+		boolean success = false;
 		DataBaseEmpleados db = new DataBaseEmpleados(context);
-        boolean success = db.addEmpleado(apellidoInput.getText().toString().trim(),
-                departamentoInput.getSelectedItem().toString().trim(),
-                Double.parseDouble(salarioInput.getText().toString().trim()));
-        if(success) {
-			Toast.makeText(context, "Empleado añadido", Toast.LENGTH_SHORT).show();
-		} else {
-        	Toast.makeText(context, "Se ha producido un error", Toast.LENGTH_SHORT).show();
+		try {
+			if(!apellidoInput.getText().toString().isEmpty() && Double.parseDouble(salarioInput.getText().toString()) >= 0) {
+				success = db.addEmpleado(apellidoInput.getText().toString().trim(),
+						departamentoInput.getSelectedItem().toString().trim(),
+						Double.parseDouble(salarioInput.getText().toString().trim()));
+			} else {
+				throw new Exception();
+			}
+
+			if(success) {
+				Toast.makeText(context, "Empleado añadido", Toast.LENGTH_SHORT).show();
+			} else {
+				Toast.makeText(context, "Se ha producido un error", Toast.LENGTH_SHORT).show();
+			}
+		} catch (Exception e) {
+			Toast.makeText(context, "Introduce los datos correctamente", Toast.LENGTH_SHORT).show();
 		}
+
 	}
 }

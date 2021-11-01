@@ -45,6 +45,12 @@
         <action
             android:id="@+id/action_ver_to_menu"
             app:destination="@id/menu" />
+        <action
+            android:id="@+id/action_ver_to_verTodos"
+            app:destination="@id/verTodos" />
+        <action
+            android:id="@+id/action_ver_to_verUno"
+            app:destination="@id/verUno" />
     </fragment>
     <fragment
         android:id="@+id/add"
@@ -72,5 +78,23 @@
         <action
             android:id="@+id/action_eliminar_to_menu"
             app:destination="@id/menu" />
+    </fragment>
+    <fragment
+        android:id="@+id/verTodos"
+        android:name="com.example.gestion_empleados.VerTodos"
+        android:label="fragment_ver_todos"
+        tools:layout="@layout/fragment_ver_todos" >
+        <action
+            android:id="@+id/action_verTodos_to_ver"
+            app:destination="@id/ver" />
+    </fragment>
+    <fragment
+        android:id="@+id/verUno"
+        android:name="com.example.gestion_empleados.VerUno"
+        android:label="fragment_ver_uno"
+        tools:layout="@layout/fragment_ver_uno" >
+        <action
+            android:id="@+id/action_verUno_to_ver"
+            app:destination="@id/ver" />
     </fragment>
 </navigation>
