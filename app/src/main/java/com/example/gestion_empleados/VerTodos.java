@@ -1,6 +1,7 @@
 package com.example.gestion_empleados;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -47,8 +48,14 @@ public class VerTodos extends Fragment {
 
 	public void setListEmpleados() {
 		DataBaseEmpleados db = new DataBaseEmpleados(context);
-		ArrayList<Empleado> empleados = db.getAllEmpleados();
-
+		Cursor cursor = db.getAllEmpleados();
+		ArrayList<Empleado> empleados = new ArrayList<>();
+		while(cursor.moveToNext()) {
+			empleados.add(new Empleado(cursor.getInt(0),
+					cursor.getString(1),
+					cursor.getString(2),
+					cursor.getDouble(3)));
+		}
 		String emps = "";
 		for (Empleado em : empleados) {
 			emps += em.toString() + "\n\n";

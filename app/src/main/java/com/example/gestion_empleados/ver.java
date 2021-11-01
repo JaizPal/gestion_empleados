@@ -23,6 +23,7 @@ public class ver extends Fragment {
     FragmentTransaction transaction;
     Fragment fragmentoMenu;
     Fragment fragmentoVerTodos;
+    Fragment fragmentoVerUno;
 
     Context context;
 
@@ -36,6 +37,7 @@ public class ver extends Fragment {
         View vista = inflater.inflate(R.layout.fragment_ver, container, false);
         fragmentoMenu = new menu();
         fragmentoVerTodos = new VerTodos();
+        fragmentoVerUno = new VerUno();
         transaction = getParentFragmentManager().beginTransaction();
         context = container.getContext();
 
@@ -53,6 +55,7 @@ public class ver extends Fragment {
     public void setListeners(View v) {
         bAtras.setOnClickListener(view -> irMenu(view));
         bTodos.setOnClickListener(view -> irVerTodos(view));
+        bUnoAuno.setOnClickListener(view -> irVerUno());
     }
 
     public void irMenu(View v) {
@@ -66,5 +69,13 @@ public class ver extends Fragment {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+    public void irVerUno() {
+        transaction.replace(R.id.fragmentContainerView3, fragmentoVerUno);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+
 
 }

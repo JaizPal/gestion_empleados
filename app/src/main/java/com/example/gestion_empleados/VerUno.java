@@ -1,64 +1,98 @@
 package com.example.gestion_empleados;
 
+import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link VerUno#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class VerUno extends Fragment {
 
-	// TODO: Rename parameter arguments, choose names that match
-	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-	private static final String ARG_PARAM1 = "param1";
-	private static final String ARG_PARAM2 = "param2";
-
-	// TODO: Rename and change types of parameters
-	private String mParam1;
-	private String mParam2;
+	FragmentTransaction transaction;
+	Fragment fragmentVer;
+	Context context;
+	Button bAnterior, bSiguiente, bVolver;
+	TextView textEmpleado;
+	Cursor cursorEmpleados;
 
 	public VerUno() {
 		// Required empty public constructor
 	}
 
-	/**
-	 * Use this factory method to create a new instance of
-	 * this fragment using the provided parameters.
-	 *
-	 * @param param1 Parameter 1.
-	 * @param param2 Parameter 2.
-	 * @return A new instance of fragment VerUno.
-	 */
-	// TODO: Rename and change types and number of parameters
-	public static VerUno newInstance(String param1, String param2) {
-		VerUno fragment = new VerUno();
-		Bundle args = new Bundle();
-		args.putString(ARG_PARAM1, param1);
-		args.putString(ARG_PARAM2, param2);
-		fragment.setArguments(args);
-		return fragment;
-	}
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		if (getArguments() != null) {
-			mParam1 = getArguments().getString(ARG_PARAM1);
-			mParam2 = getArguments().getString(ARG_PARAM2);
-		}
-	}
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		// Inflate the layout for this fragment
-		return inflater.inflate(R.layout.fragment_ver_uno, container, false);
+		View vista = inflater.inflate(R.layout.fragment_ver_uno, container, false);
+		transaction = getParentFragmentManager().beginTransaction();
+		fragmentVer = new ver();
+		context = container.getContext();
+		bAnterior = vista.findViewById(R.id.botonAnterior);
+		bSiguiente = vista.findViewById(R.id.botonSiguiente);
+		bVolver = vista.findViewById(R.id.botonVolverInVerUno);
+		textEmpleado = vista.findViewById(R.id.textViewEmpleado);
+		setListeners(vista);
+		getCursor();
+		return vista;
+	}
+
+	public void setListeners(View v) {
+		bAnterior.setOnClickListener(view -> anteriorEmpleado());
+		bSiguiente.setOnClickListener(view -> siguienteEmpleado());
+		bVolver.setOnClickListener(view -> irMenuVer());
+	}
+
+	public void anteriorEmpleado() {
+		if(cursorEmpleados.isFirst()) {
+			cursorEmpleados.moveToLast();
+		} else {
+			cursorEmpleados.moveToPrevious();
+		}
+		setEmpleado(new Empleado(cursorEmpleados.getInt(0),
+				cursorEmpleados.getString(1),
+				cursorEmpleados.getString(2),
+				cursorEmpleados.getDouble(3)));
+	}
+
+	public void siguienteEmpleado() {
+		if(cursorEmpleados.isLast()) {
+			cursorEmpleados.moveToFirst();
+		} else {
+			cursorEmpleados.moveToNext();
+		}
+		setEmpleado(new Empleado(cursorEmpleados.getInt(0),
+				cursorEmpleados.getString(1),
+				cursorEmpleados.getString(2),
+				cursorEmpleados.getDouble(3)));
+		Toast.makeText(context, "Empleados: " + cursorEmpleados.getPosition(), Toast.LENGTH_SHORT).show();
+	}
+
+	public void setEmpleado(Empleado empleado) {
+		textEmpleado.setText(empleado.toString());
+	}
+
+	public void getCursor() {
+		DataBaseEmpleados db = new DataBaseEmpleados(context);
+		cursorEmpleados = db.getAllEmpleados();
+		cursorEmpleados.moveToNext();
+		setEmpleado(new Empleado(cursorEmpleados.getInt(0),
+				cursorEmpleados.getString(1),
+				cursorEmpleados.getString(2),
+				cursorEmpleados.getDouble(3)));
+	}
+
+	public void irMenuVer() {
+		transaction.replace(R.id.fragmentContainerView3, fragmentVer);
+		transaction.addToBackStack(null);
+		transaction.commit();
+
 	}
 }

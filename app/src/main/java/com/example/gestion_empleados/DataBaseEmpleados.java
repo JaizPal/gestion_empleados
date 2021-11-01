@@ -59,7 +59,7 @@ public class DataBaseEmpleados extends SQLiteOpenHelper {
         return result != -1;
     }
 
-    ArrayList<Empleado> getAllEmpleados() {
+    Cursor getAllEmpleados() {
         ArrayList<Empleado> empleados = new ArrayList<>();
         String query = "SELECT * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -68,12 +68,9 @@ public class DataBaseEmpleados extends SQLiteOpenHelper {
         if(db != null) {
             cursor = db.rawQuery(query, null);
         }
-        while(cursor.moveToNext()) {
-            empleados.add(new Empleado(cursor.getInt(0),
-                    cursor.getString(1),
-                    cursor.getString(2),
-                    cursor.getDouble(3)));
-        }
-        return empleados;
+
+        return cursor;
     }
+
+
 }
