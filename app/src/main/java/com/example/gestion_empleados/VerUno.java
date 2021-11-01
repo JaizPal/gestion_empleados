@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class VerUno extends Fragment {
@@ -33,7 +32,7 @@ public class VerUno extends Fragment {
 							 Bundle savedInstanceState) {
 		View vista = inflater.inflate(R.layout.fragment_ver_uno, container, false);
 		transaction = getParentFragmentManager().beginTransaction();
-		fragmentVer = new ver();
+		fragmentVer = new Ver();
 		context = container.getContext();
 		bAnterior = vista.findViewById(R.id.botonAnterior);
 		bSiguiente = vista.findViewById(R.id.botonSiguiente);
@@ -72,7 +71,6 @@ public class VerUno extends Fragment {
 				cursorEmpleados.getString(1),
 				cursorEmpleados.getString(2),
 				cursorEmpleados.getDouble(3)));
-		Toast.makeText(context, "Empleados: " + cursorEmpleados.getPosition(), Toast.LENGTH_SHORT).show();
 	}
 
 	public void setEmpleado(Empleado empleado) {
@@ -83,10 +81,17 @@ public class VerUno extends Fragment {
 		DataBaseEmpleados db = new DataBaseEmpleados(context);
 		cursorEmpleados = db.getAllEmpleados();
 		cursorEmpleados.moveToNext();
-		setEmpleado(new Empleado(cursorEmpleados.getInt(0),
-				cursorEmpleados.getString(1),
-				cursorEmpleados.getString(2),
-				cursorEmpleados.getDouble(3)));
+		if(cursorEmpleados.getCount() == 0) {
+			textEmpleado.setText("No se han encontrado empleados");
+			bAnterior.setVisibility(View.INVISIBLE);
+			bSiguiente.setVisibility(View.INVISIBLE);
+		} else {
+			setEmpleado(new Empleado(cursorEmpleados.getInt(0),
+					cursorEmpleados.getString(1),
+					cursorEmpleados.getString(2),
+					cursorEmpleados.getDouble(3)));
+		}
+
 	}
 
 	public void irMenuVer() {

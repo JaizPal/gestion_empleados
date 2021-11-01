@@ -4,27 +4,21 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-
-import com.example.gestion_empleados.databinding.FragmentMenuBinding;
-
-public class menu extends Fragment {
+public class Menu extends Fragment {
 
 
     FragmentTransaction transaction;
     Fragment fragmentoBuscar, fragmentoVer, fragmentoAdd, fragmentoModificar;
     Button botonBusacar, botonVer, botonAdd, botonModificar;
 
-    public menu() {
+    public Menu() {
         // Required empty public constructor
     }
 
@@ -34,10 +28,10 @@ public class menu extends Fragment {
 
 
         View vista = inflater.inflate(R.layout.fragment_menu, container, false);
-        fragmentoBuscar = new buscar();
-        fragmentoVer = new ver();
-        fragmentoAdd = new add();
-        fragmentoModificar = new modificar();
+        fragmentoBuscar = new Buscar();
+        fragmentoVer = new Ver();
+        fragmentoAdd = new Add();
+        fragmentoModificar = new Modificar();
 
         transaction = getParentFragmentManager().beginTransaction();
 

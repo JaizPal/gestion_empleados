@@ -11,12 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
-
-import java.util.ArrayList;
 
 
-public class ver extends Fragment {
+public class Ver extends Fragment {
 
     Button bAtras, bTodos, bUnoAuno;
     ScrollingView scrollView;
@@ -27,7 +24,7 @@ public class ver extends Fragment {
 
     Context context;
 
-    public ver() {
+    public Ver() {
         // Required empty public constructor
     }
 
@@ -35,7 +32,7 @@ public class ver extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View vista = inflater.inflate(R.layout.fragment_ver, container, false);
-        fragmentoMenu = new menu();
+        fragmentoMenu = new Menu();
         fragmentoVerTodos = new VerTodos();
         fragmentoVerUno = new VerUno();
         transaction = getParentFragmentManager().beginTransaction();

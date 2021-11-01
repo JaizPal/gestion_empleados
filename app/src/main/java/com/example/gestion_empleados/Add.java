@@ -9,16 +9,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 
-public class add extends Fragment {
+public class Add extends Fragment {
 
 	Button bAtras, bAdd;
 	EditText apellidoInput, salarioInput;
@@ -28,7 +26,7 @@ public class add extends Fragment {
 
 	Context context;
 
-	public add() {
+	public Add() {
 		// Required empty public constructor
 	}
 	@Override
@@ -37,7 +35,7 @@ public class add extends Fragment {
 
 		View view = inflater.inflate(R.layout.fragment_add, container, false);
 		transaction = getParentFragmentManager().beginTransaction();
-		fragmentoMenu = new menu();
+		fragmentoMenu = new Menu();
 		context = container.getContext();
 
 		bAdd = view.findViewById(R.id.botonAddInAdd);

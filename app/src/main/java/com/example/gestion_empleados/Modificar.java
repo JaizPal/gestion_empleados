@@ -11,29 +11,34 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 
-public class buscar extends Fragment {
+public class Modificar extends Fragment {
 
     Button bAtras;
+    Button bModificar;
     FragmentTransaction transaction;
     Fragment fragmentoMenu;
-    public buscar() {
+
+    public Modificar() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_buscar, container, false);
-        bAtras = view.findViewById(R.id.botonAtrasInBuscar);
-        fragmentoMenu = new menu();
+        View view = inflater.inflate(R.layout.fragment_modificar, container, false);
+        fragmentoMenu = new Menu();
         transaction = getParentFragmentManager().beginTransaction();
+
+        bAtras = view.findViewById(R.id.botonVolverInModificar);
+
+
         setListeners(view);
+
         return view;
     }
 
     public void setListeners(View v) {
-        bAtras.setOnClickListener(view -> irMenu(view));
+        bAtras.setOnClickListener(view1 -> irMenu(v));
     }
 
     public void irMenu(View v) {

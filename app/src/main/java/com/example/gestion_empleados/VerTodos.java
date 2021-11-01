@@ -33,7 +33,7 @@ public class VerTodos extends Fragment {
 		View vista = inflater.inflate(R.layout.fragment_ver_todos, container, false);
 
 		transaction = getParentFragmentManager().beginTransaction();
-		fragmentoVer = new ver();
+		fragmentoVer = new Ver();
 		context = container.getContext();
 		bVolver = vista.findViewById(R.id.botonVolverInVerTodos);
 		textViewTodos = vista.findViewById(R.id.textViewVerTodos);
@@ -60,7 +60,12 @@ public class VerTodos extends Fragment {
 		for (Empleado em : empleados) {
 			emps += em.toString() + "\n\n";
 		}
-		textViewTodos.setText(emps);
+		if(emps.isEmpty()) {
+			textViewTodos.setText("No se han encontrado empleados");
+		} else {
+			textViewTodos.setText(emps);
+		}
+
 	}
 
 	public void irVer(View view) {

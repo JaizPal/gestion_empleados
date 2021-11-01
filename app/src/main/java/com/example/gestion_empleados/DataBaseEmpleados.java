@@ -60,7 +60,6 @@ public class DataBaseEmpleados extends SQLiteOpenHelper {
     }
 
     Cursor getAllEmpleados() {
-        ArrayList<Empleado> empleados = new ArrayList<>();
         String query = "SELECT * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
 

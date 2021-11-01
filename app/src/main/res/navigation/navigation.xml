@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/menu"
-        android:name="com.example.gestion_empleados.menu"
+        android:name="com.example.gestion_empleados.Menu"
         android:label="fragment_menu"
         tools:layout="@layout/fragment_menu" >
         <action
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/buscar"
-        android:name="com.example.gestion_empleados.buscar"
+        android:name="com.example.gestion_empleados.Buscar"
         android:label="fragment_buscar"
         tools:layout="@layout/fragment_buscar" >
         <action
@@ -39,7 +39,7 @@
     </fragment>
     <fragment
         android:id="@+id/ver"
-        android:name="com.example.gestion_empleados.ver"
+        android:name="com.example.gestion_empleados.Ver"
         android:label="fragment_ver"
         tools:layout="@layout/fragment_ver" >
         <action
@@ -54,7 +54,7 @@
     </fragment>
     <fragment
         android:id="@+id/add"
-        android:name="com.example.gestion_empleados.add"
+        android:name="com.example.gestion_empleados.Add"
         android:label="fragment_add"
         tools:layout="@layout/fragment_add" >
         <action
@@ -63,7 +63,7 @@
     </fragment>
     <fragment
         android:id="@+id/modificar"
-        android:name="com.example.gestion_empleados.modificar"
+        android:name="com.example.gestion_empleados.Modificar"
         android:label="fragment_modificar"
         tools:layout="@layout/fragment_modificar" >
         <action
@@ -72,7 +72,7 @@
     </fragment>
     <fragment
         android:id="@+id/eliminar"
-        android:name="com.example.gestion_empleados.eliminar"
+        android:name="com.example.gestion_empleados.Eliminar"
         android:label="fragment_eliminar"
         tools:layout="@layout/fragment_eliminar" >
         <action
