@@ -63,24 +63,20 @@ public class Buscar extends Fragment {
         } else {
             bajarTeclado(view);
             Empleado empleado = buscarEmpleado(Integer.parseInt(idText));
+            infoEmpleado.setVisibility(View.VISIBLE);
             if(empleado == null) {
-                infoEmpleado.setVisibility(View.VISIBLE);
                 infoEmpleado.setText("El empleado no existe");
                 infoEmpleado.setTextColor(getResources().getColor(R.color.redSelec));
             } else {
-                infoEmpleado.setVisibility(View.VISIBLE);
+                infoEmpleado.setTextColor(getResources().getColor(R.color.white));
                 infoEmpleado.setText(empleado.toString());
             }
         }
     }
 
     public Empleado buscarEmpleado(int id) {
-        Empleado empleado = null;
-        for (Empleado e: empleados) {
-            if(e.getId() == id) {
-                empleado = e;
-            }
-        }
+        DataBaseEmpleados db = new DataBaseEmpleados(context);
+        Empleado empleado = db.getEmpleado(id);
         return empleado;
     }
 

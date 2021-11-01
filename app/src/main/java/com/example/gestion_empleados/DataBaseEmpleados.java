@@ -70,6 +70,40 @@ public class DataBaseEmpleados extends SQLiteOpenHelper {
 
         return cursor;
     }
+    Empleado getEmpleado(int id) {
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUM_ID + " = " + id;
+        SQLiteDatabase db = this.getReadableDatabase();
 
+        Empleado empleado = null;
+        Cursor cursor = null;
+        if(db != null) {
+            cursor = db.rawQuery(query, null);
+            if(cursor.moveToNext()) {
+                empleado = new Empleado(cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getDouble(3));
+            }
+
+        }
+        return empleado;
+    }
+
+    boolean modificarEmpleado(Empleado empleado) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUM_APELLIDOS, empleado.getApellido());
+        cv.put(COLUM_DEPARTAMENTO, empleado.getDepartamento());
+        cv.put(COLUM_SALARIO, empleado.getSalario());
+
+        long result = db.update(TABLE_NAME, cv, COLUM_ID + " = " + empleado.getId(), null);
+        return result != -1;
+    }
+
+    boolean eliminarEmpleado(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.delete(TABLE_NAME, COLUM_ID + " = " + id, null);
+        return result != -1;
+    }
 
 }

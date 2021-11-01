@@ -1,64 +1,100 @@
 package com.example.gestion_empleados;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Eliminar#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class Eliminar extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    FragmentTransaction transaction;
+    Fragment fragmentMenu;
+    EditText editTextId;
+    TextView infoEmpleado;
+    Button bEliminar, bVolver, bBuscar;
+    Context context;
 
     public Eliminar() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment eliminar.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Eliminar newInstance(String param1, String param2) {
-        Eliminar fragment = new Eliminar();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_eliminar, container, false);
+        fragmentMenu = new Menu();
+        transaction = getParentFragmentManager().beginTransaction();
+        context = container.getContext();
+        View vista = inflater.inflate(R.layout.fragment_eliminar, container, false);;
+        editTextId = vista.findViewById(R.id.editTextTextIdInEliminar);
+        infoEmpleado = vista.findViewById(R.id.infoEmpleadoEliminar);
+        bEliminar = vista.findViewById(R.id.botonEliminarInEliminar);
+        bVolver = vista.findViewById(R.id.botonVolverInEliminar);
+        bBuscar = vista.findViewById(R.id.botonBuscarInEliminar);
+        setListeners(vista);
+        return vista;
+    }
+
+    public void setListeners(View view) {
+        bBuscar.setOnClickListener(v -> mostrarInfoEmpleado(v));
+        bVolver.setOnClickListener(v -> volverMenu());
+        bEliminar.setOnClickListener(v -> eliminarEmpleado(v));
+    }
+
+
+    public Empleado mostrarInfoEmpleado(View v) {
+        bajarTeclado(v);
+        Empleado empleado = null;
+        DataBaseEmpleados db = new DataBaseEmpleados(context);
+        infoEmpleado.setVisibility(View.VISIBLE);
+        if (!editTextId.getText().toString().isEmpty()) {
+            empleado = db.getEmpleado(Integer.parseInt(editTextId.getText().toString()));
+            if(empleado != null) {
+                infoEmpleado.setText(empleado.toString());
+            } else {
+                infoEmpleado.setText("No existe el empleado");
+            }
+
+        } else {
+            infoEmpleado.setText("No has ingresado ningún ID");
+        }
+        return empleado;
+    }
+
+    public void eliminarEmpleado(View v) {
+        DataBaseEmpleados db = new DataBaseEmpleados(context);
+        Empleado empleado = mostrarInfoEmpleado(v);
+        boolean eliminado = false;
+        if (empleado != null) {
+            eliminado = db.eliminarEmpleado(empleado.getId());
+        }
+        if(eliminado) {
+            Toast.makeText(context, "Se ha eliminado al empleado", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "El empleado no ha sido eliminado", Toast.LENGTH_SHORT).show();
+        }
+        editTextId.setText("");
+        infoEmpleado.setVisibility(View.INVISIBLE);
+    }
+
+    public void volverMenu() {
+        transaction.replace(R.id.fragmentContainerView3, fragmentMenu);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public void bajarTeclado(View view) {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

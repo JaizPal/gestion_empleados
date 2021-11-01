@@ -91,7 +91,6 @@ public class VerUno extends Fragment {
 					cursorEmpleados.getString(2),
 					cursorEmpleados.getDouble(3)));
 		}
-
 	}
 
 	public void irMenuVer() {

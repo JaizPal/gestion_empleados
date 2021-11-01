@@ -40,12 +40,14 @@ public class Add extends Fragment {
 
 		bAdd = view.findViewById(R.id.botonAddInAdd);
 		bAtras = view.findViewById(R.id.botonVolverInAdd);
-		apellidoInput = view.findViewById(R.id.editTextApellidoInAdd);
+		apellidoInput = view.findViewById(R.id.editTextApellidoInModificar);
 		departamentoInput = view.findViewById(R.id.spinner);
+
+
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, R.layout.itemspinner, DataBaseEmpleados.LISTA_DEPARTAMENTOS);
 		departamentoInput.setAdapter(adapter);
-		salarioInput = view.findViewById(R.id.editTextSalarioInAdd);
+		salarioInput = view.findViewById(R.id.editTextSalarioInModificar);
 
 		setListeners(view);
 		return view;
@@ -54,6 +56,12 @@ public class Add extends Fragment {
 	public void setListeners(View v) {
 		bAdd.setOnClickListener(view -> addEmpleado(view));
 		bAtras.setOnClickListener(view -> irMenu(view));
+		departamentoInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View view, boolean b) {
+				bajarTeclado(view);
+			}
+		});
 
 	}
 

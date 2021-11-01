@@ -15,8 +15,8 @@ public class Menu extends Fragment {
 
 
     FragmentTransaction transaction;
-    Fragment fragmentoBuscar, fragmentoVer, fragmentoAdd, fragmentoModificar;
-    Button botonBusacar, botonVer, botonAdd, botonModificar;
+    Fragment fragmentoBuscar, fragmentoVer, fragmentoAdd, fragmentoModificar, fragmentoEliminar;
+    Button botonBusacar, botonVer, botonAdd, botonModificar, botonEliminar;
 
     public Menu() {
         // Required empty public constructor
@@ -32,6 +32,7 @@ public class Menu extends Fragment {
         fragmentoVer = new Ver();
         fragmentoAdd = new Add();
         fragmentoModificar = new Modificar();
+        fragmentoEliminar = new Eliminar();
 
         transaction = getParentFragmentManager().beginTransaction();
 
@@ -46,6 +47,9 @@ public class Menu extends Fragment {
 
         botonModificar = vista.findViewById(R.id.botonModificar);
         botonModificar.setOnClickListener(view -> irMenuModificar(view));
+
+        botonEliminar = vista.findViewById(R.id.botonEliminar);
+        botonEliminar.setOnClickListener(view -> irMenuEliminar());
 
         return vista;
     }
@@ -74,6 +78,13 @@ public class Menu extends Fragment {
     public void irMenuModificar(View v) {
         desactivarBotones();
         transaction.replace(R.id.fragmentContainerView3, fragmentoModificar);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public void irMenuEliminar() {
+        desactivarBotones();
+        transaction.replace(R.id.fragmentContainerView3, fragmentoEliminar);
         transaction.addToBackStack(null);
         transaction.commit();
     }
